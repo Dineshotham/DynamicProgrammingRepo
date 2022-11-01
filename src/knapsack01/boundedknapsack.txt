@@ -49,9 +49,15 @@ int knapSack( int w[], int val[],int n, int W){
         }
 }
 
+Time Complexity :: O(2^n) n being the number of elements
+The above method still needs some modification. Since in recursion there are multiple calls which are similar
+it would be prudent to apply memoization. Which is smart recursion or DP.We can use a table.
 
+We can modify to DP in the following manner.
+We need to identify the state variants. The variants here are capacity and number of the item.
+We first need to create array mem[][].
+This will be used to store the immediate results. The time complexity now will be size of table size.
 
+int knapSackRecursiveDP(int w[],int val[],int n, int W){
 
-
-
-
+}
