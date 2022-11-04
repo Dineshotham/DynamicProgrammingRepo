@@ -14,8 +14,33 @@ public class BoundedKnapsack {
         else
             return recursiveKnapSack(w,val,n-1,W);//Not included
     }
+//Recrusive Knapsack ends
 
-    //modifying recursive to Memoized
+    //Bottom Up Tabulation Approach
+    public static int tabKnapsack(int w[],int val[],int W){
+        int dp[][]= new int[w.length+1][W+1];
+
+        for(int i=0;i<=w.length;i++){
+            for(int j=0;j<=W;j++){
+                if(i==0||j==0)
+                    dp[i][j]=0;
+                else if(w[i-1]>j)
+                    dp[i][j]=dp[i-1][j];
+                else{
+                    dp[i][j]=Math.max((val[i-1]+dp[i-1][j-w[i-1]]),
+                            (dp[i-1][j]));
+                }
+            }
+        }
+
+
+
+        return dp[w.length][W];
+
+    }
+
+
+    //modifying recursive to Memoized Knapsack
     public static int memoizedKnapSackCaller(int w[],int val[],int W){
         int memTable[][]= new int[w.length+1][W+1];
         for( int[] row:memTable){
@@ -37,6 +62,7 @@ public class BoundedKnapsack {
                 memoizedKnapSack(w,val,n-1,W,memTable)); //Not included
 
     }
+    //Memoized KnapSack Ends
     public static void main(String ar[]){
 
         int w[]={1,3,4,5}; // Weight Array
@@ -45,5 +71,7 @@ public class BoundedKnapsack {
         System.out.println(recursiveKnapSack(w,val,w.length,W));
         System.out.println("---------------------------------------------");
         System.out.println(memoizedKnapSackCaller(w,val,W));
+        System.out.println("---------------------------------------------");
+        System.out.println(tabKnapsack(w,val,W));
     }
 }
