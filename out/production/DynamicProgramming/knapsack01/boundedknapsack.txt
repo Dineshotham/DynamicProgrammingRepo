@@ -1,0 +1,63 @@
+This is for bounded knapsack.
+We're trying to maximize the profit.
+This is recursive approach for knapsack.
+
+We've 2 arrays provided
+1) Weight Array which is the weight of each item that comprises an array w[]
+2) Value array which provides the value that the item has val[]
+
+In addition to the 2 arrays, we're provided a Knapsack capacity W.
+
+We need to find the maximum profit when keeping these items inside the knapsack not exceeding capacity W.
+This is the 0/1 knapsack problem where there is no option for fractional items.
+
+Choice Diagram
+----------------
+
+To solve this recursively we need to think in this direction.
+Imagine we've the knapsack has W=10 and the item value w1=11.
+In this case, we can't include the item in the knapsack.
+The counterpoint where the knapsack capacity is zero also is valid. These will form our boundary conditions.
+
+At each choice point, we will need to think whether the item can be included or not, which is a choice diagram.
+
+                                        Choice diagram
+                                             W=7,val=0
+                                    if(w[i]<W)    if (w[i] > W) [Can't be included]
+                                        /   \            \
+                                       /     \            \
+//Increase the value val[i]   val=val+val[i] X              X
+// Or not include                 W=W-w[i] //Decrease the existing capacity of Knapsack with weight of item
+
+In the case where we would not like to include the value even if the weight is less than capacity basically is decided by recursion.
+In recursion the next set of steps decide whether the current value arrived at is optimal or not.
+The max is between 2 series of recursions one with including and one without including.
+These are two choices to be made.
+
+We need to convert this choice diagram into recursive code. Later the recursive code can be converted to DP based code.
+n:size
+int knapSack( int w[], int val[],int n, int W){
+
+        if(W==0||n==0) //Think of the smallest valid input :: Base Condition
+            return 0;
+//Choice Diagram Code
+        if(w[n-1] <= W){
+        return Math.Max((val[n-1]+knapSack(w,val,W-w[n-1],n-1)),knapsack(w,val,W,n-1));
+        }
+        else{
+            return knapSack(w,val,W,n-1);
+        }
+}
+
+Time Complexity :: O(2^n) n being the number of elements
+The above method still needs some modification. Since in recursion there are multiple calls which are similar
+it would be prudent to apply memoization. Which is smart recursion or DP.We can use a table.
+
+We can modify to DP in the following manner.
+We need to identify the state variants. The variants here are capacity and number of the item.
+We first need to create array mem[][].
+This will be used to store the immediate results. The time complexity now will be size of table size.
+
+int knapSackRecursiveDP(int w[],int val[],int n, int W){
+
+}
