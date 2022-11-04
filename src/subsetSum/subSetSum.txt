@@ -1,0 +1,17 @@
+SubSetSum
+
+
+SubSetSum is a variant of Knapsack where given an array, we need
+to check whether there is a Subset that can provide a given sum.
+
+For eg::
+
+Given array:: [1,2,3] and sum:5
+We need to check whether there exists a subset within array that
+provides us the sum 5.
+For eg here 2,3 can provide the sum5.
+
+First approach is BackTracking using Recursion.
+It has O(2^n) which is prohibitive in performance.
+However, for my practice I would like to write Recursive Code first.
+
